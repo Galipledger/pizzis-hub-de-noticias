@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="icon" href="imagenes/file.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/public/css/contactanos.css">
@@ -20,9 +21,14 @@
             <a href="">trucos</a>
             <a href="">comunidad</a>
         </nav>                     
-        <div class="registro">                                                                                                                                                                                                                     
+        <div class="registro">
+            <% if (nombreUsuario) { %> 
+                <span class="usuario"> <%= nombreUsuario %></span>
+                <a class="cerrar" href="/logout">Cerrar sesión</a>     
+                <% } else { %>                                                                                                                                                                                        
              <a class="iniciar" href="/login">inicia sesion</a>
              <a class="regristrarse" href="/usuario/0">regristrarse</a>
+             <% } %>
         </div>
     </header>
     <section>

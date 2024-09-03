@@ -347,3 +347,28 @@ footer .links a:hover{
 span{
     color: rgb(255, 0, 0);
 }
+header .registro .cerrar{
+    
+    padding: 15px;
+    background-color: #1b1818;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+header .registro .usuario{
+    color: white;
+    font-size: 22px;
+    position: relative;
+    right: 20px;
+    font-family: 'VT323', monospace;
+}
+header .registro .cerrar:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    
+}
+span{
+    font-size: 20px;
+}

@@ -12,7 +12,7 @@
         <h1>inicia sesión</h1>                                                                                                                  
         <input type="email" placeholder="email" id="email" >
         <input type="password" placeholder="contraseña" id="contraseña">
-        <a  class="olvidar">¿olvidaste tu contraseña?</a>
+        <a href="#"  class="olvidar">¿olvidaste tu contraseña?</a>
         <button id="boton">iniciar sesión</button>
         <p>no tienes una cuenta de pizzis? <a  href="/usuario/0" class="register">regístrate</a></p>
     </form>
@@ -20,6 +20,10 @@
         const email = document.querySelector("#email");
         const contraseña = document.querySelector("#contraseña");
         const boton = document.querySelector("#boton");
+        const olvidar = document.querySelector(".olvidar")
+        olvidar.addEventListener("click",()=>{
+            alert("para recuperar tu contraseña contactanos: pizzisbloggamer@gmail.com")
+        })
     
         boton.addEventListener("click", async (event) => {
             event.preventDefault();
