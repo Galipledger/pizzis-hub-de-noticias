@@ -1,0 +1,245 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+form{
+   display: flex;
+   flex-direction: column;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   padding-top: 40px;
+   padding-bottom: 40px;
+   padding-left: 40px;
+   padding-right: 40px;
+   border: 1px solid rgb(255, 255, 255);
+   border-radius: 15px;                                                                                                              
+   animation: borderanimacion 7s infinite,shadowanimacion 7s infinite;
+   transition: box-shadow 0.3s ease ;
+}
+input{
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background: transparent;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid rgb(255, 253, 253);
+    margin-top: 30px;
+}
+p , .register{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+p{
+    color: rgb(255, 255, 255);
+}
+ button{
+    animation: botonanimado 7s infinite, botonshadow 7s infinite;
+    cursor: pointer;
+    font-size: 15px;
+    border: none;                               
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 30px;
+}
+h1{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    text-align: center;
+    
+}
+body{                
+    height: 100vh;                                                                                                                                                          
+    background:linear-gradient(black,rgb(46, 41, 41));
+     font-family: sans-serif;
+}
+input::placeholder{
+    color: rgb(255, 255, 255);
+} 
+
+input:focus {
+    outline: none;                                                                   
+    animation: focusanimacion 5s infinite alternate;
+}
+
+@keyframes shadowanimacion {
+    0% {
+        box-shadow: 0 0 30px #FF0000; 
+    }
+    14% {
+        box-shadow: 0 0 30px #FF7F00; 
+    }
+    28% {
+        box-shadow: 0 0 30px #FFFF00; 
+    }
+    42% {
+        box-shadow: 0 0 30px #00FF00; 
+    }
+    57% {
+        box-shadow: 0 0 30px #0000FF; 
+    }                                                       
+    71% {
+        box-shadow: 0 0 30px #4B0082;
+    }
+    85% {
+        box-shadow: 0 0 30px #8B00FF; 
+    }
+    100% {
+        box-shadow: 0 0 30px #FF0000;
+    }
+
+}
+@keyframes borderanimacion {
+    0% {
+        border-color: #FF0000; 
+    }
+    14% {
+        border-color: #FF7F00; 
+    }
+    28% {
+        border-color: #FFFF00; 
+    }
+    42% {
+        border-color: #00FF00;  
+    }
+    57% {
+        border-color: #0000FF;  
+    }
+    71% {
+        border-color: #4B0082;
+    }
+    85% {
+        border-color: #8B00FF; 
+    }
+    100% {
+        border-color: #FF0000; 
+    }
+}
+a{
+    margin-top: 20px;
+    color: #2689e6;
+    text-decoration: none;
+}
+@keyframes focusanimacion {
+    0%{
+        border-color: #FF0000;
+    }
+    14% {
+        border-color: #FF7F00; 
+    }
+    28% {
+        border-color: #FFFF00; 
+    }
+    42% {
+        border-color: #00FF00;  
+    }
+    57% {
+        border-color: #0000FF;  
+    }
+    71% {
+        border-color: #4B0082;
+    }
+    85% {
+        border-color: #8B00FF; 
+    }
+    100% {
+        border-color: #FF0000; 
+    }
+}
+
+
+.olvidar{
+    color: #2689e6;
+    text-decoration: none;
+    transition: 0.3s color ease;
+    animation: Aanimacion 7s infinite ;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+@keyframes Aanimacion {
+    0%{
+        color: #FF0000;
+    }
+    14% {
+        color: #FF7F00; 
+    }
+    28% {
+        color: #FFFF00; 
+    }
+    42% {
+        color: #00FF00;  
+    }
+    57% {
+        color: #0000FF;  
+    }
+    71% {
+        color: #4B0082;
+    }
+    85% {
+        color: #8B00FF; 
+    }
+    100% {
+        color: #FF0000; 
+    }
+}
+
+@keyframes botonanimado{
+    0%{
+        color: #FF0000;
+    }
+    14% {
+        color: #FF7F00; 
+    }
+    28% {
+        color: #FFFF00; 
+    }
+    42% {
+        color: #00FF00;  
+    }
+    57% {
+        color: #0000FF;  
+    }
+    71% {
+        color: #4B0082;
+    }
+    85% {
+        color: #8B00FF; 
+    }
+    100% {
+        color: #FF0000; 
+    }
+}
+@keyframes botonshadow{
+    0% {
+        box-shadow: 0 0 20px #FF0000; 
+    }
+    14% {
+        box-shadow: 0 0 20px #FF7F00; 
+    }
+    28% {
+        box-shadow: 0 0 20px #FFFF00; 
+    }
+    42% {
+        box-shadow: 0 0 20px #00FF00; 
+    }
+    57% {
+        box-shadow: 0 0 20px #0000FF; 
+    }                                                       
+    71% {
+        box-shadow: 0 0 20px #4B0082;
+    }
+    85% {
+        box-shadow: 0 0 20px #8B00FF; 
+    }
+    100% {
+        box-shadow: 0 0 20px #FF0000;
+    }
+}
+

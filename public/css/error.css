@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    font-family: 'VT323', monospace;
+    background-color: black;
+    color: white;
+    animation: colorerror 7s infinite;
+}
+
+@keyframes colorerror{
+    0% {
+        color:  #FF0000; 
+    }
+    14% {
+        color:  #FF7F00; 
+    }
+    28% {
+        color:  #FFFF00; 
+    }
+    42% {
+        color:  #00FF00; 
+    }
+    57% {
+        color:  #0000FF; 
+    }                                                       
+    71% {
+        color:  #4B0082;
+    }
+    85% {
+        color:  #8B00FF; 
+    }
+    100% {
+        color:  #FF0000;
+    }
+}
+
+ h1 {                                      
+    transform: translate(-50%, -0%);
+    left: 50%;
+    position: absolute;
+    top: 80%;
+    font-size: 125px;
+}
+p{
+    color: rgb(255, 255, 255);
+    font-size: 45px;
+    position: absolute;
+    top: 20%;
+    left: -220px;
+}
+@media (max-width: 768px) {
+    img{
+        height: 300px;
+        width: 300px;
+    }
+    h1 {
+        
+        font-size: 80px;
+    }
+
+    p {
+        position: absolute;
+        top: 25px;
+        left: 10%;
+        text-align: center;
+        font-size: 30px;
+    }
+    
+}
+
+@keyframes focusanimacion {
+    0%{
+        border-color: #FF0000;
+    }
+    14% {
+        border-color: #FF7F00; 
+    }
+    28% {
+        border-color: #FFFF00; 
+    }
+    42% {
+        border-color: #00FF00;  
+    }
+    57% {
+        border-color: #0000FF;  
+    }
+    71% {
+        border-color: #4B0082;
+    }
+    85% {
+        border-color: #8B00FF; 
+    }
+    100% {
+        border-color: #FF0000; 
+    }
+}
+

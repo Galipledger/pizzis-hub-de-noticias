@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/public/css/crear.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <h1>registrate</h1>
+        <input type="text" id="nombre"  placeholder="nombre" value="<%= usuario?.nombre%>" required>
+
+        <input type="email" id="email"  placeholder="email"value="<%= usuario?.email %>"  required>
+                                                                                                                 
+        <input type="password" id="contraseña" placeholder="contraseña" value="<%= usuario?.contraseña %>" required>
+       
+        <button id="boton">Crear Usuario</button>
+        <p>¿ya tienes cuenta de pizzis? <a href="/login">inicia sesion</a></p>
+    </form>
+
+    <script>
+         const nombre = document.querySelector("#nombre")
+         const email = document.querySelector("#email");
+         const contraseña = document.querySelector("#contraseña");
+         const boton = document.querySelector("#boton");
+         boton.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const datos = {
+                nombre: nombre.value,
+                email: email.value,
+                contraseña: contraseña.value,
+                id: <%= usuario.id %>
+            };
+
+            const results = await fetch("/usuario", {
+                method: "post",
+                body: JSON.stringify(datos),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await results.json();
+            if (data.success === true) {
+                location.href = "/home";
+            } else {
+                alert("hubo un problema");
+            }
+        });
+    </script>
+</body>
+</html>

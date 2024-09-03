@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="imagenes/file.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/login.css">
+</head>
+<body>
+    <form>                                                                     
+        <h1>inicia sesión</h1>                                                                                                                  
+        <input type="email" placeholder="email" id="email" >
+        <input type="password" placeholder="contraseña" id="contraseña">
+        <a  class="olvidar">¿olvidaste tu contraseña?</a>
+        <button id="boton">iniciar sesión</button>
+        <p>no tienes una cuenta de pizzis? <a  href="/usuario/0" class="register">regístrate</a></p>
+    </form>
+    <script type="text/javascript">
+        const email = document.querySelector("#email");
+        const contraseña = document.querySelector("#contraseña");
+        const boton = document.querySelector("#boton");
+    
+        boton.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const result = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    contraseña: contraseña.value
+                }),
+            });
+    
+            const data = await result.json();
+    
+            if (data.error == 1) {
+                alert("Usuario o contraseña incorrecta");
+            } else {
+                location.href = "/home";
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
