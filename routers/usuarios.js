@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const usercontroller = require("../controllers/usuario");
@@ -9,6 +10,8 @@ router.post("/usuario", Usercontroller.guardarusuario);
 
 router.get('/login', Usercontroller.mostrarFormulario);
 router.post('/login', Usercontroller.validarFormulario);
+
+router.get('/logout', Usercontroller.cerrarSesion);
 
 router.get("/ayuda", (req, res) => res.render("ayuda"));
 router.get("/politicas", (req, res) => res.render("politicaprivacidad"));

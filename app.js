@@ -12,7 +12,12 @@ app.use(session({
     saveUnitialized: true,
     resave: true,
   }));
-  //
+  // Middleware para pasar nombreusuario a las vistas
+app.use((req, res, next) => {
+  res.locals.nombreUsuario = req.session.nombreUsuario;
+  next();
+});
+
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 

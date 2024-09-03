@@ -1,4 +1,4 @@
-const Usuariosmodel = require("../models/usuarios");                                  
+const Usuariosmodel = require("../models/usuarios");
 const usuariosmodel = new Usuariosmodel();
 
 class usuariocontroller {
@@ -26,35 +26,41 @@ class usuariocontroller {
         });
     }
 
-    mostrarFormulario (req, res) {
-		res.render('login');
-	}
+    mostrarFormulario(req, res) {
+        res.render('login');
+    }
 
-	async validarFormulario (req, res) {
+    async validarFormulario(req, res) {
+        const email = req.body.email;
+        const contraseña = req.body.contraseña;
 
-		// Para recibir datos yo puedo utilizar:
-		// req.query -> recibo los datos por url (normalmente GET)
-		// req.params -> recibo los datos por comodin 
-		// req.body -> recibo los datos por body (normalmente POST Y PUT)
-		const email = req.body.email;
-		const contraseña = req.body.contraseña;
+        const usuario = await usuariosmodel.validarUsuario(email, contraseña);
+        
+        if (usuario != null) {
+            req.session.idUsuario = usuario.id;
+            req.session.nombreUsuario = usuario.nombre; // Almacena el nombre del usuario en la sesión
 
-		const usuario = await usuariosmodel.validarUsuario(email, contraseña);
-		
-		if (usuario != null) {
-			req.session.idUsuario = usuario.id;
-		
-			console.log(req.session);
-			res.json({
-				"idUsuario": usuario.id,
-				"error": 0
-			});
-		} else {
-			res.json({
-				"error": 1,
-			});
-		}
-	}
+            console.log(req.session);
+            res.json({
+                "idUsuario": usuario.id,
+                "error": 0
+            });
+        } else {
+            res.json({
+                "error": 1,
+            });
+        }
+    }
+
+    cerrarSesion(req, res) {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.redirect('/home'); 
+            }
+            res.redirect('/login');
+        });
+    }
 }
 
 module.exports = usuariocontroller;
+
