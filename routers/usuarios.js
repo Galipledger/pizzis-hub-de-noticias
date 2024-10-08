@@ -12,14 +12,14 @@ router.get('/login', Usercontroller.mostrarFormulario);
 router.post('/login', Usercontroller.validarFormulario);
 
 router.get('/logout', Usercontroller.cerrarSesion);
-
+router.get("/trucosytips",(req,res)=>{
+    res.render("trucos")
+})
 router.get("/ayuda", (req, res) => res.render("ayuda"));
 router.get("/politicas", (req, res) => res.render("politicaprivacidad"));
 router.get("/contactos", (req, res) => res.render("contactanos"));
 router.get("/home", (req, res) => res.render("index"));
 
-router.use((req, res) => {
-    res.status(404).render("error");
-});
+
 
 module.exports = router;

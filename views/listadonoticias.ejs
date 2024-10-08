@@ -1,0 +1,171 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+
+    <link rel="icon" href="imagenes/file.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/noticias.css">
+    <meta charset="UTF-8">
+    <title>Noticias</title>
+</head>
+<body>
+    <header>
+        <div class="logo">                                
+            <img src="/public/imagenes/file.png" height="120">
+        </div>
+        <nav>
+            <a href="/home">inicio</a>
+            <a href="/noticias">noticias</a>
+            <a href="">reseñas</a>
+            <a href="/trucosytips">trucos</a>
+            <a href="">comunidad</a>
+        </nav>
+
+        <div class="registro">         
+            <% if (nombreUsuario) { %>
+                <span class="usuario"> <%= nombreUsuario %></span>
+                <a class="cerrar" href="/logout">Cerrar sesión</a>
+            <% } else { %>
+                <a class="iniciar" href="/login">iniciar sesion</a>
+                <a class="regristrarse" href="/usuario/0">registrarse</a>
+            <% } %>
+        </div>
+    </header>
+
+    <h1>Últimas Noticias</h1>
+
+   
+    <div class="contenedor-buscador-filtro">
+        <form class="formulario" action="/noticias/buscar" method="GET">
+            <input type="text" name="query" placeholder="Buscar noticias" value="<%= query || '' %>">
+            <button class="buscar" type="submit"> <i class="fas fa-search"></i></button>
+        </form>
+        
+        <form class="filtro" action="/noticias" method="GET">
+            <label for="order">Ordenar por:</label>
+            <select name="order" id="order">
+                <option value="desc">Más recientes</option>
+                <option value="asc">Más antiguas</option>
+            </select>
+            <label for="filtro">Filtrar por:</label>
+            <select name="filtro" id="filtro">
+                <option value="">Ninguno</option>
+                <option value="likes">Más likes</option>
+            </select>
+            <button type="submit">Aplicar</button>
+        </form>
+        
+        
+        
+       
+            <% if (es_admin) { %>
+                <a href="/noticias/crear" class="crear-noticia"><img src="/public/imagenes/361984.png" alt=""></a>
+            <% } %>
+        
+    </div>
+    
+    
+  
+
+    <div class="noticias-grid">
+        <% if (noticias.length > 0) { %>
+            <% noticias.forEach(noticia => { %>
+             
+                <div class="noticia-cuadro">
+                    <img src="/uploads/<%= noticia.miniatura %>" alt="Miniatura de la noticia">
+                    
+                  
+                    <div class="noticia-info">
+                        <h2><%= noticia.titulo %></h2>
+                        <p><%= noticia.contenido.substring(0, 100) %>...</p>
+                        <a href="/noticias/<%= noticia.id %>">Leer más</a>
+                        <div class="likes-dislikes">  
+                            <p class="likes">  
+                                <i class="fas fa-thumbs-up"></i>  
+                                <span><%= noticia.likes %></span>  
+                            </p>  
+                            <p class="dislikes">  
+                                <i class="fas fa-thumbs-down"></i>  
+                                <span><%= noticia.dislikes %></span>  
+                            </p>  
+                    </div>
+                    </div>
+                    
+                           
+                   
+                    <% if (es_admin) { %>
+                        <div class="acciones-admin">
+                            <a href="/noticias/<%= noticia.id %>/editar" class="editar">✎ Actualizar</a>
+                            <form class="botoneliminar" action="/noticias/<%= noticia.id %>/eliminar" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta noticia?');">
+                                <button type="submit" class="btn-eliminar">🗑️ Eliminar</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No se encontraron noticias</p>
+        <% } %>
+    </div>
+  
+    <div class="paginador">  
+        <% if (currentPage > 1) { %>  
+            <a href="?page=<%= currentPage - 1 %>&query=<%= query %>"><</a>  
+        <% } %>  
+        <% for (let i = 1; i <= totalPages; i++) { %>  
+            <a href="?page=<%= i %>&query=<%= query %>"  
+               <%= currentPage === i ? 'style="font-weight:bold;"' : '' %>  
+            ><%= i %></a>  
+        <% } %>  
+        <% if (currentPage < totalPages) { %>  
+            <a href="?page=<%= currentPage + 1 %>&query=<%= query %>">></a>  
+        <% } %>  
+    </div>
+    
+
+    <footer>
+        <div class="footerconteiner">
+            <div class="imagenfooter">
+                <img src="/imagenes/file.png" height="150" width="150">
+            </div>
+            <div class="redes">
+                <h4>¡síguenos!</h4>
+                <a href="https://www.facebook.com/tuUsuario" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.twitter.com/tuUsuario" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/tuUsuario" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/tuUsuario" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.snapchat.com/add/tuUsuario" target="_blank">
+                    <i class="fab fa-snapchat"></i>
+                </a>
+                <a href="https://www.tiktok.com/@tuUsuario" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/tuNumeroDeTelefono" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.youtube.com/tuUsuario" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="links">
+                <h4>más links</h4>
+                <ul>
+                    <li><a href="/home">inicio</a></li>
+                    <li><a href="/ayuda">ayuda</a></li>
+                    <li><a href="/contactos">contáctanos</a></li>
+                    <li><a href="/politicas">política de privacidad</a></li>
+                </ul>
+            </div>
+        </div>       
+    </footer>
+    <script 
+src="/public/js/index.js"></script> 
+</body></html> 

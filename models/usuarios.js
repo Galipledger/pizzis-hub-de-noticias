@@ -1,12 +1,22 @@
 const conx = require("../database/db");
 
 class Usuariosmodel {
+    async validarUsuarioPorEmail(email) {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM usuarios WHERE email = ?";
+            conx.query(sql, [email], (err, results) => {
+                if (err) return reject(err);
+                resolve(results.length > 0); // Devuelve true si hay un usuario con ese correo
+            });
+        });
+    }
+    
     validarUsuario(email, contraseña) {
         return new Promise((resolve, reject) => {
             let sql = `SELECT * FROM usuarios WHERE email = ? AND contraseña = ?`;
             conx.query(sql, [email, contraseña], (err, results) => {
                 try {
-                    if (results.length == 0) {
+                    if (results.length === 0) {
                         resolve(null);
                     }
                     resolve(results[0]);

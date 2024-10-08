@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Noticia</title>
+    <link rel="stylesheet" href="/public/css/editarnoticia.css">
+</head>
+<body>
+    <form action="/noticias/<%= noticia.id %>/editar" method="POST">
+        <h1>Editar Noticia</h1>
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" value="<%= noticia.titulo %>">
+
+        <label for="contenido">Contenido</label>
+        <textarea id="contenido" name="contenido"><%= noticia.contenido %></textarea>
+
+        <button type="submit">Actualizar noticia</button>
+    </form>
+</body>
+</html>

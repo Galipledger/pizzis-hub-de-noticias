@@ -5,6 +5,7 @@ const session = require('express-session');
 var path = require('path');
 const routers = require("./routers/usuarios");
 const routerpanel = require("./routers/panel")
+const noticias = require("./routers/noticias")
 
 // MiddleWare
 app.use(session({
@@ -27,8 +28,12 @@ app.set("view engine", "ejs")
 //rutas
 app.use("/",routers)
 app.use("/",routerpanel)
+app.use("/",noticias)
 
 
+app.use((req, res) => {
+  res.status(404).render("error");
+});
 app.listen(port,()=>{
     console.log(`el servidor esta escuchando`)
 })

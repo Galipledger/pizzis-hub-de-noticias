@@ -4,7 +4,7 @@ const conx = mysql.createConnection({
     "host": "localhost",
     "user": "root",
     "password": "",
-    "database": "pizzis"
+    "database": "pizzis1"
 })
 conx.connect((error)=>{
    if(error){

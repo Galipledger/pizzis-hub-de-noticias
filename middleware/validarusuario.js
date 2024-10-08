@@ -6,3 +6,6 @@ const validarusuario = (req, res, next) => {
 }
 
 module.exports = validarusuario;
+
+
+

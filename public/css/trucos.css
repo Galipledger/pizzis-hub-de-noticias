@@ -1,0 +1,273 @@
+header{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    padding: 10px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    background-color: rgb(32, 35, 46);        
+    border-bottom: 5px solid rgb(247, 0, 0);
+    transition: height 0.5s ease, padding 0.5s ease;
+}
+header .registro{
+    position: relative;
+    left: -50px;
+}
+header nav{
+    gap: 15px;
+    display: flex;
+    position: relative;
+    left: -30px;
+}
+header nav a{
+    text-decoration: none;
+    font-size: 22px;
+    color:rgb(255, 255, 255);
+}
+*{
+  
+    margin: 0;
+    padding: 0;
+}
+header .registro .regristrarse{
+    transition: padding 0.5s ease;
+    background-color: rgb(247, 0, 0);
+    padding: 20px;
+    border-radius: 20px;
+    color:  rgb(255, 255, 255);
+}
+header .registro .iniciar{
+    transition: padding 0.5s ease;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    color: rgb(247, 0, 0);
+}
+header .logo img{
+    transition: height 0.5s ease, widht 0.5s ease;
+}
+a{
+    text-decoration: none;
+}
+header nav a:hover{
+    transition: color 0.5s ease;
+    color: rgb(255, 0, 0);
+}
+body{
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgb(19, 18, 18);
+}
+section{
+    justify-content: center;
+    padding: 22px;
+    display: flex;
+    text-align: center;
+    margin: 2px auto 0
+}
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #1b1818;
+    padding-top: 30px;
+    margin-top: 30px;
+    flex-direction: column;
+}
+footer h4{
+    color: white;
+}
+footer  a{
+    color: rgb(154, 152, 152);
+    text-decoration: none;
+
+}
+footer ul{
+    list-style: none;
+}
+footer .footerconteiner{
+    display: flex;
+}
+footer ul li{
+    margin: 12px 0;
+}
+footer .imagenfooter{
+ padding-right: 100px;
+ border-right:  1px solid white;
+}
+footer .redes{
+    padding-left: 100px;
+}
+footer .redes a i{
+    display: inline-flex;
+    background-color: antiquewhite;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    font-size: 22px;
+    margin-top: 16px;
+}
+
+footer .redes .fa-facebook-f{
+   background-color: blue;
+    color: rgb(255, 255, 255);
+}
+footer .redes .fa-twitter{
+  color: rgb(61, 159, 233);
+}
+footer .redes .fa-instagram{  
+    background:linear-gradient( rgb(213, 55, 213),pink, orange);
+    color: rgb(255, 255, 255);
+}
+footer .redes .fa-youtube{
+    color: white;
+    background-color: red;
+}
+footer .redes .fa-linkedin-in{
+    color: white;
+    background-color: blue;
+}
+footer .redes .fa-snapchat{
+    background-color: rgb(252, 252, 13);
+    color: white;
+}
+footer .redes  .fa-tiktok{
+    color:white;
+    background-color: black;
+}
+footer .redes  .fa-whatsapp{
+    color: white;
+    background-color: rgb(6, 232, 25);
+}
+
+footer .links{
+    padding-left: 100px;
+    border-left:  1px solid white;
+}
+footer .redes{
+    padding-right: 100px;
+}
+
+
+
+footer .redes .fa-snapchat:hover{
+    transition: color 1s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .redes .fa-whatsapp:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .redes .fa-tiktok:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+footer .redes .fa-facebook-f:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .redes .fa-youtube:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .redes .fa-linkedin-in:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .redes .fa-instagram:hover{
+    transition: color 0.5s ease, background-color 0.5s ease;
+    color: rgb(0, 0, 0);                                                                             
+    background: linear-gradient(rgb(255, 255, 255), rgb(106, 106, 106), rgb(18, 18, 18));
+}
+footer .redes .fa-twitter:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    color: white;
+    background-color: black;
+}
+footer .links a:hover{
+    text-decoration: underline;
+}
+.achicar img{
+   height: 85px;
+   width: 85px;
+   transition: height 0.5s ease, width 0.5 ease;
+}
+ .achicar {
+        height: 60px; 
+        padding: 5px;
+       
+     }
+
+.achicar .registro .regristrarse{
+    padding: 10px;
+    transition:  padding 0.5s ease;
+}
+.achicar .registro .iniciar{
+    transition:  padding 0.5s ease;
+    padding: 10px;
+}
+
+header .registro .cerrar{
+    
+    padding: 15px;
+    background-color: #1b1818;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+header .registro .usuario{
+    color: white;
+    font-size: 18px;
+    position: relative;
+    right: 20px;
+}
+header .registro .cerrar:hover{
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    
+}
+.introduccion{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(87, 149, 87);
+    color: rgb(228, 220, 220);
+    width: 60%;
+    box-shadow: 0 0 20px rgb(37, 231, 15);
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin: 160px auto 0;
+}
+.titulotrucos{
+    margin-top: 70px;
+    color: #ffffff;
+    position: relative;
+    left: 70px;
+    margin-bottom: 100px;
+    font-size:50px;
+}

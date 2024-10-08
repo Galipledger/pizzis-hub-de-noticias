@@ -4,50 +4,72 @@
     <link rel="stylesheet" href="/public/css/crear.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro</title>
 </head>
 <body>
     <form>
-        <h1>registrate</h1>
-        <input type="text" id="nombre"  placeholder="nombre" value="<%= usuario?.nombre%>" required>
-
-        <input type="email" id="email"  placeholder="email"value="<%= usuario?.email %>"  required>
-                                                                                                                 
-        <input type="password" id="contraseña" placeholder="contraseña" value="<%= usuario?.contraseña %>" required>
-       
+        <h1>Regístrate</h1>
+        <input type="text" id="nombre" placeholder="Nombre" value="<%= usuario?.nombre%>" required>
+        <input type="email" id="email" placeholder="Email" value="<%= usuario?.email %>" required>
+        <input type="password" id="contraseña" placeholder="Contraseña" value="<%= usuario?.contraseña %>" required>
         <button id="boton">Crear Usuario</button>
-        <p>¿ya tienes cuenta de pizzis? <a href="/login">inicia sesion</a></p>
+        <p>¿Ya tienes cuenta de Pizzis? <a href="/login">Inicia sesión</a></p>
     </form>
 
+    <div id="mensaje-bienvenida"></div>
+
     <script>
-         const nombre = document.querySelector("#nombre")
-         const email = document.querySelector("#email");
-         const contraseña = document.querySelector("#contraseña");
-         const boton = document.querySelector("#boton");
-         boton.addEventListener("click", async (event) => {
-            event.preventDefault();
-            const datos = {
-                nombre: nombre.value,
-                email: email.value,
-                contraseña: contraseña.value,
-                id: <%= usuario.id %>
-            };
+        const nombre = document.querySelector("#nombre");
+        const email = document.querySelector("#email");
+        const contraseña = document.querySelector("#contraseña");
+        const boton = document.querySelector("#boton");
+        const mensajeBienvenida = document.querySelector("#mensaje-bienvenida");
 
-            const results = await fetch("/usuario", {
-                method: "post",
-                body: JSON.stringify(datos),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+        boton.addEventListener("click", async (event) => {
+    event.preventDefault();
 
-            const data = await results.json();
-            if (data.success === true) {
-                location.href = "/home";
-            } else {
-                alert("hubo un problema");
-            }
-        });
+    // Validaciones
+    const contraseñaValida = /^(?=.*\d.*\d)(?=.*[a-zA-Z]).{5,}$/; // Al menos 5 caracteres y 2 números
+    const dominioValido = email.value.endsWith('@gmail.com');
+
+    if (!contraseñaValida.test(contraseña.value)) {
+        alert("La contraseña debe tener al menos 5 caracteres y 2 números.");
+        return;
+    }
+
+    if (!dominioValido) {
+        alert("El correo debe ser un @gmail.com.");
+        return;
+    }
+
+    const datos = {
+        nombre: nombre.value,
+        email: email.value,
+        contraseña: contraseña.value,
+        id: <%= usuario.id %>
+    };
+
+    const results = await fetch("/usuario", {
+        method: "post",
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const data = await results.json();
+    if (data.success === true) {
+        mensajeBienvenida.textContent = `Bienvenido ${nombre.value} a Pizzis, ahora puedes iniciar sesión.`;
+        mensajeBienvenida.classList.add("mostrar");
+
+        // Redireccionar después de unos segundos
+        setTimeout(() => {
+            location.href = "/home";
+        }, 3000);
+    } else {
+        alert(data.error); // Mostrar el mensaje de error devuelto por el servidor
+    }
+});
     </script>
 </body>
 </html>

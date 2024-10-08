@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/public/css/detallenoticias.css">
+    <meta charset="UTF-8">
+    <title><%= noticia.titulo %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+ 
+    <h1 class="titulo-noticia"><%= noticia.titulo %></h1>                                                      
+    <img class="miniatura" src="/uploads/<%= noticia.miniatura %>" alt="Miniatura de la noticia">
+    
+    <p class="content"><%= noticia.contenido %></p>
+    <% if (noticia.video) { %>
+        <video class="video-noticia" controls>
+            <source src="/uploads/<%= noticia.video %>" type="video/mp4">
+         
+        </video>
+    <% } %>
+    <small>Publicado el <%= noticia.fecha_publicacion %></small>
+   
+
+<h3>Reacciones</h3>
+<div class="reactions-container"></div>
+    <div class="vote-buttons">
+        <form action="/noticias/<%= noticia.id %>/votar" method="POST" class="formlike">
+            <input type="hidden" name="tipo" value="like">
+            <button type="submit"><i class="fas fa-thumbs-up"></i></button>
+        </form>
+
+        <form action="/noticias/<%= noticia.id %>/votar" method="POST" class="formdislike">
+            <input type="hidden" name="tipo" value="dislike">
+            <button type="submit"><i class="fas fa-thumbs-down"></i></button>
+        </form>
+    </div>
+
+    <!-- Mostrar cantidad de likes y dislikes -->
+    <div class="likes-dislikes">
+        <p class="likes">
+            <i class="fas fa-thumbs-up"></i>
+            <span><%= likesDislikes.likes %></span>
+        </p>
+        <p class="dislikes">
+            <i class="fas fa-thumbs-down"></i>
+            <span><%= likesDislikes.dislikes %></span>
+        </p>
+    </div>
+</div>
+
+    <h3>Comentarios</h3>
+    <ul>
+        <% if (comentarios.length === 0) { %>
+            <li>Aún no hay comentarios disponibles</li>
+        <% } else { %>
+            <% comentarios.forEach(comentario => { %>
+                <li>
+                    <strong><%= comentario.nombre %></strong>: <%= comentario.comentario %>
+                    <br>
+                    <small><%= comentario.fecha_comentario %></small>
+    
+                    <% if (nombreUsuario && comentario.nombre === nombreUsuario) { %>                                                                       
+                        <!-- Botón para mostrar el formulario de edición -->
+                        <button class="edit-button" onclick="document.getElementById('form-editar-<%= comentario.id %>').style.display = 'block'">Editar</button>
+                        
+                        <!-- Formulario de edición, oculto por defecto -->
+                        <form id="form-editar-<%= comentario.id %>" action="/noticias/comentario/editar/<%= comentario.id %>" method="POST" style="display:none;">
+                            <textarea name="comentario"><%= comentario.comentario %></textarea>
+                            <button type="submit">Guardar</button>
+                        </form>
+    
+                        <!-- Formulario para eliminar comentario -->
+                        <form action="/noticias/comentario/eliminar/<%= comentario.id %>" method="POST" style="display: inline;">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    <% } %>
+                </li>
+            <% }) %>
+        <% } %>
+    </ul>
+    
+    <% if (nombreUsuario) { %>
+        <h3>Agrega un comentario</h3>
+        <form action="/noticias/<%= noticia.id %>/comentar" method="POST">
+            <textarea name="comentario" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    <% } else { %>
+        <p class="sesion">Inicia sesión para comentar</p>
+    <% } %>
+    <script src="/public/js/index.js"></script>
+</body>
+</html>
