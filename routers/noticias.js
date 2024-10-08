@@ -5,7 +5,7 @@ const noticiasController = new NoticiasController();
 const { upload } = require("../controllers/noticias");   
 router.post("/noticias/:id/votar", noticiasController.votar);
 router.get("/noticias", noticiasController.listarNoticias);                                                              
-                                                               
+                                                    
 router.post("/noticias/comentario/eliminar/:idComentario", noticiasController.eliminarComentario);
 router.post("/noticias/comentario/editar/:idComentario", noticiasController.editarComentario);
 

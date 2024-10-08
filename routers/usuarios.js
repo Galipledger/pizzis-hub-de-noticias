@@ -3,7 +3,9 @@ const express = require("express");
 const router = express.Router();
 const usercontroller = require("../controllers/usuario");
 const Usercontroller = new usercontroller();
-
+router.get("/chat",(req,res)=>{
+    res.render("chat")}
+ )   
 router.get("/usuarios", Usercontroller.listarusuarios);
 router.get("/usuario/:id", Usercontroller.editarusuariio);
 router.post("/usuario", Usercontroller.guardarusuario);

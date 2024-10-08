@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/public/css/chat.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamer Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-app">
+    
+     
+    
+    <div class="sidebar">
+      <div class="contenedorimagen"> 
+      <img src="/public/imagenes/file.png" width="170px" height="170px">
+      </div>
+      <h2>canales</h2>
+      <ul>
+        <li># general</li>
+        <li># support</li>
+        <li># gaming</li>
+      </ul>
+    </div>
+    <div class="chat-area">
+      <div id="messages" class="messages"></div>
+      <form id="form" class="form">
+        <input id="input" autocomplete="off" placeholder="escribe un mensaje..." />
+        <button>chatear</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/index.js"></script>
+</body>
+</html>
