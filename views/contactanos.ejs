@@ -17,9 +17,12 @@
         <nav>
             <a href="/home">inicio</a>
             <a href="/noticias">noticias</a>
-            <a href="">reseñas</a>
+            <a href="/resenas">reseñas</a>
             <a href="/trucosytips">trucos</a>
-            <a href="">comunidad</a>
+            <a href="/chat">comunidad</a>
+            <% if (es_admin) { %> 
+                <a href="/usuarios">usuarios</a> 
+            <% } %>
         </nav>                     
         <div class="registro">
             <% if (nombreUsuario) { %> 

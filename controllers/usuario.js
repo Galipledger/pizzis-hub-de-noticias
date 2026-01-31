@@ -2,6 +2,28 @@ const Usuariosmodel = require("../models/usuarios");
 const usuariosmodel = new Usuariosmodel();
 
 class usuariocontroller {
+      async listarusuarios(req, res) {
+        const busqueda = req.query.busqueda || '';
+        usuariosmodel.listar(busqueda, (users) => {
+            res.render("listado", { usuarios: users, busqueda });
+        });
+    }
+
+
+    // Método para banear usuario
+    async banearUsuario(req, res) {
+        const { id, duracion, motivo } = req.body;
+        await usuariosmodel.banearUsuario(id, duracion, motivo);
+        res.redirect("/usuarios"); // Redirige al listado de usuarios
+    }
+
+    // Método para desbanear usuario
+    async desbanearUsuario(req, res) {
+        const { id } = req.body;
+        await usuariosmodel.desbanearUsuario(id);
+        res.redirect("/usuarios");
+    }
+
     async guardarusuario(req, res) {
         const { nombre, email, contraseña } = req.body;
     
@@ -22,12 +44,7 @@ class usuariocontroller {
     }
     
 
-    async listarusuarios(req, res) {
-        usuariosmodel.listar((users) => {
-            console.log(users);
-            res.render("listado", { usuarios: users });
-        });
-    }
+   
 
     async editarusuariio(req, res) {
         const id = req.params.id;
@@ -53,9 +70,21 @@ class usuariocontroller {
         const usuario = await usuariosmodel.validarUsuario(email, contraseña);
     
         if (usuario != null) {
+            // Verificar si el usuario está baneado
+            if (usuario.baneado) {
+                return res.json({
+                    "error": 2,
+                    "mensaje": {
+                        "motivo": usuario.motivo_baneo,
+                        "duracion": usuario.fecha_fin_baneo ? usuario.fecha_fin_baneo : 'Indefinido'
+                    }
+                });
+            
+            }
+    
             req.session.idUsuario = usuario.id;
             req.session.nombreUsuario = usuario.nombre;
-            req.session.es_admin = usuario.es_admin;  // Guarda si es administrador
+            req.session.es_admin = usuario.es_admin; // Guarda si es administrador
     
             res.json({
                 "idUsuario": usuario.id,
@@ -67,6 +96,7 @@ class usuariocontroller {
             });
         }
     }
+    
     
 
     cerrarSesion(req, res) {

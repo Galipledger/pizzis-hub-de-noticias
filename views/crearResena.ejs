@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="imagenes/file.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Reseña</title>
+    <link rel="stylesheet" href="/public/css/crearnoticia.css"> 
+</head>
+<body>
+    <form action="/resenas" method="POST" enctype="multipart/form-data">
+        <h1>Crear Reseña</h1>
+        
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+        
+        <label for="contenido">Contenido:</label>
+        <textarea id="contenido" name="contenido" required></textarea>
+        
+        <label for="miniatura">Logo:</label>
+        <input type="file" id="miniatura" name="miniatura" accept="image/*" required>
+        
+        <label for="video">Video:</label>
+        <input type="file" id="video" name="video" accept="video/*">
+        
+        <button type="submit">Crear Reseña</button>
+    </form>
+</body>
+</html>
+

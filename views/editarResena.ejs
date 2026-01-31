@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="imagenes/file.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Reseña</title>
+    <link rel="stylesheet" href ="/public/css/editarresenas.css">
+</head>
+<body>
+    <form action="/resenas/<%= resena.id %>/actualizar" method="POST">
+        <h1>Editar Reseña</h1>
+
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" value="<%= resena.titulo %>" required>
+
+        <label for="contenido">Contenido</label>
+        <textarea id="contenido" name="contenido" required><%= resena.contenido %></textarea>
+
+        <button type="submit">Actualizar Reseña</button>
+    </form>
+</body>
+</html>

@@ -446,9 +446,9 @@ footer .links a:hover{
 }
 .paginador {
     display: flex;
-    justify-content: center; /* Centra el paginador */
+    justify-content: center;
     align-items: center;
-    margin: 20px 0; /* Espaciado superior e inferior */
+    margin: 20px 0; 
 }
 
 .paginador a {
@@ -463,7 +463,7 @@ footer .links a:hover{
 
 .paginador a:hover {
     background-color: #ff0000; 
-    transform: scale(1.05); 
+  
 }
 
 .paginador a[style*="font-weight:bold;"] {

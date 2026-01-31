@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/public/imagenes/file.png">
+    <link rel="stylesheet" href="/public/css/detalleresenas.css">
+    <meta charset="UTF-8">
+    <title><%= resena.titulo %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1 class="titulo-resena"><%= resena.titulo %></h1>                                                      
+    <img class="miniatura" src="/uploads/<%= resena.miniatura %>" alt="Miniatura de la reseña">
+    
+    <p class="content"><%= resena.contenido %></p>
+    
+    <% if (resena.video) { %>
+        <video class="video-resena" controls>
+            <source src="/uploads/<%= resena.video %>" type="video/mp4">
+        </video>
+    <% } %>
+
+    
+    <small class="autor-reseña">
+        escrito por <%= resena.autor %> | Publicado el <%= resena.fecha_publicacion %>
+    </small>
+    
+
+
+   
+    <h3>Calificaciones</h3>
+    <div class="calificaciones-container"></div>
+
+  
+    <div class="calificacion-promedio">
+        <p>
+            <%= typeof promedio === 'number' ? `Calificación promedio: ${promedio.toFixed(1)} estrellas` : 'No calificado aún' %>
+        </p>
+    
+        <div class="estrellas-promedio">
+            <% let estrellasRedondeadas = Math.round(promedio); %>
+            <% for (let i = 1; i <= 5; i++) { %>
+                <% if (i <= estrellasRedondeadas) { %>
+                    &#9733; 
+                <% } else { %>
+                    &#9734;
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+    
+          
+
+          
+
+
+  
+    <div class="calificar-container">
+        <form action="/resenas/<%= resena.id %>/calificar" method="POST">
+            <label for="calificacion">danos tu opinion de  <%= resena.titulo %></h1>   </label>
+            <div class="estrellas-boton-contenedor">
+                <div class="estrellas-calificacion">
+                    <% for (let i = 5; i >= 0.5; i -= 0.5) { %>
+                        <input type="radio" id="estrella<%= i %>" name="calificacion" value="<%= i %>" required>
+                        <label for="estrella<%= i %>">&#9733;</label>
+                    <% } %>
+                </div>
+                <button type="submit" class="boton-calificar">calificar</button>
+            </div>
+            <button class="share-button" onclick="compartir()">🔗 Compartir</button>
+        </form>
+    </div>
+    
+
+
+    <div class="comentarios">
+        <h3>Comentarios</h3>
+        <ul>
+            <% if (comentarios.length === 0) { %>
+                <li>Aún no hay comentarios disponibles</li>
+            <% } else { %>
+                <% comentarios.forEach(comentario => { %>
+                    <li>
+                        <strong><%= comentario.autor %></strong>: <%= comentario.comentario %>
+                        <br>
+                        <small><%= comentario.fecha_comentario %></small>
+        
+                        <% if (session.idUsuario && comentario.id_usuario === session.idUsuario) { %>
+                            <!-- Botón para mostrar el formulario de edición -->
+                            <button class="edit-button" onclick="document.getElementById('form-editar-<%= comentario.id %>').style.display = 'block'">Editar</button>
+        
+                            <!-- Formulario de edición, oculto por defecto -->
+                            <form id="form-editar-<%= comentario.id %>" action="/resenas/comentario/editar/<%= comentario.id %>" method="POST" style="display:none;">
+                                <textarea name="comentario"><%= comentario.comentario %></textarea>
+                                <button type="submit">Guardar</button>
+                            </form>
+        
+                            <!-- Formulario para eliminar comentario -->
+                            <form action="/comentarios/<%= comentario.id %>/eliminar" method="POST" style="display: inline;">
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        <% } %>
+                    </li>
+                <% }) %>
+            <% } %>
+        </ul>
+        
+        <!-- Formulario para agregar un comentario -->
+        <% if (session.idUsuario) { %>
+            <h3>Agrega un comentario</h3>
+            <form action="/resenas/<%= resena.id %>/comentar" method="POST">
+                <textarea name="comentario" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        <% } else { %>
+            <p class="sesion">Inicia sesión para comentar</p>
+        <% } %>
+
+
+    <script src="/public/js/index.js">
+    </script>
+    <script>
+         function compartir() {
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Enlace copiado al portapapeles');
+                });
+            }
+    </script>
+</body>
+</html>

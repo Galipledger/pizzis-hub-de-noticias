@@ -36,7 +36,7 @@ p , .register{
 p{
     color: rgb(255, 255, 255);
 }
- button{
+ #boton{
     animation: botonanimado 7s infinite, botonshadow 7s infinite;
     cursor: pointer;
     font-size: 15px;

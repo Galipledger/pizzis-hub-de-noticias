@@ -62,6 +62,33 @@ document.addEventListener('DOMContentLoaded', () => {
    updateSelectState();
 });
 
+// Conectar con Socket.io
+const socket = io();
+
+// Referencias a los elementos del DOM
+const form = document.getElementById('form');
+const input = document.getElementById('input');
+const messages = document.getElementById('messages');
+
+// Escuchar el evento de envío de formulario
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (input.value) {
+    // Emitir el mensaje al servidor
+    socket.emit('chat message', input.value);
+    input.value = '';
+  }
+});
+
+// Escuchar mensajes del servidor y mostrarlos en la página
+socket.on('chat message', (msg) => {
+  const item = document.createElement('li');
+  item.textContent = msg;
+  messages.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
+});
+
+
 
 
 

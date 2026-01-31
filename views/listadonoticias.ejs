@@ -16,9 +16,12 @@
         <nav>
             <a href="/home">inicio</a>
             <a href="/noticias">noticias</a>
-            <a href="">reseñas</a>
+            <a href="/resenas">reseñas</a>
             <a href="/trucosytips">trucos</a>
-            <a href="">comunidad</a>
+            <a href="/chat">comunidad</a>
+            <% if (es_admin) { %> 
+                <a href="/usuarios">usuarios</a> 
+            <% } %>
         </nav>
 
         <div class="registro">         
@@ -55,13 +58,11 @@
             <button type="submit">Aplicar</button>
         </form>
         
+        <% if (es_admin) { %>
+            <a href="/noticias/crear" class="crear-noticia"><img src="/public/imagenes/361984.png" alt=""></a>
+        <% } %>
         
-        
-       
-            <% if (es_admin) { %>
-                <a href="/noticias/crear" class="crear-noticia"><img src="/public/imagenes/361984.png" alt=""></a>
-            <% } %>
-        
+     
     </div>
     
     
@@ -94,7 +95,7 @@
                            
                    
                     <% if (es_admin) { %>
-                        <div class="acciones-admin">
+                        <div class="acciones-admin">                                                                                         
                             <a href="/noticias/<%= noticia.id %>/editar" class="editar">✎ Actualizar</a>
                             <form class="botoneliminar" action="/noticias/<%= noticia.id %>/eliminar" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta noticia?');">
                                 <button type="submit" class="btn-eliminar">🗑️ Eliminar</button>

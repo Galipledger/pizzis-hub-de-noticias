@@ -5,29 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/css/listado.css">
 </head>
 <body>
-    <a href="/usuario/0>">crear usuario</a>
-    <h1>Listado</h1>
+    <h1>usuarios</h1>
+    <form action="/usuarios" method="GET">
+        <input type="text" name="busqueda" placeholder="Buscar usuarios..." value="<%= busqueda %>">
+        <button type="submit">Buscar</button>
+    </form>
     <table>
         <thead>
             <tr>
-                <th>id</th>
-                <th>nombre</th>
-                <th>email</th>
-                <th>contraseña</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <% usuarios.forEach((user) => { %>
-            <tr>
-                <td><%= user.id %></td>
-                <td><%= user.nombre %></td>
-                <td><%= user.email %></td>
-                <td><%= user.contraseña %></td>
-                <td><a href="/usuario/<%=user.id%>">editar usuario</a></td>
-            </tr>
+            <% if (usuarios.length === 0) { %>
+                <tr>
+                    <td colspan="4">Usuario no encontrado</td>
+                </tr>
+            <% } else { %>
+            <% usuarios.forEach(usuario => { %>
+                <tr>
+                    <td><%= usuario.nombre %></td>
+                    <td><%= usuario.email %></td>
+                    <td><%= usuario.baneado ? "Baneado" : "Activo" %></td>
+                    <td>
+                        <% if (!usuario.baneado) { %>
+                            <form action="/banear" method="POST">
+                                <input type="hidden" name="id" value="<%= usuario.id %>">
+                                <input type="number" name="duracion" placeholder="Duración (días)" required>
+                                <input type="text" name="motivo" placeholder="Motivo del baneo" required>
+                                <button type="submit">Banear</button>
+                            </form>
+                        <% } else { %>
+                            <form action="/desbanear" method="POST">
+                                <input type="hidden" name="id" value="<%= usuario.id %>">
+                                <button type="submit">Desbanear</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
             <% }) %>
+            <% } %>
         </tbody>
     </table>
 </body>

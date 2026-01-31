@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Guía o Truco</title>
+    <link rel="stylesheet" href="/public/css/editartruco.css">
+</head>
+    
+
+    <form action="/trucosytips/editar/<%= guiaTruco.id %>" method="POST" enctype="multipart/form-data">
+        <div class="campo">
+            <h1>Editar Guía o Truco</h1>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="<%= guiaTruco.titulo %>" required>
+        </div>
+
+        <div class="campo">
+            <label for="contenido">Contenido:</label>
+            <textarea id="contenido" name="contenido" required><%= guiaTruco.contenido %></textarea>
+        </div>
+
+        <!-- Opcional: subir nueva miniatura o video -->
+       
+
+        <button type="submit" class="btn-guardar">Guardar cambios</button>
+    </form>
+</body>
+</html>

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="/public/imagenes/file.png">
     <link rel="stylesheet" href="/public/css/detallenoticias.css">
     <meta charset="UTF-8">
     <title><%= noticia.titulo %></title>
@@ -20,7 +21,9 @@
          
         </video>
     <% } %>
-    <small>Publicado el <%= noticia.fecha_publicacion %></small>
+    <small > 
+         Publicado el <%= noticia.fecha_publicacion %>
+    </small>
    
 
 <h3>Reacciones</h3>
@@ -48,6 +51,7 @@
             <span><%= likesDislikes.dislikes %></span>
         </p>
     </div>
+    <button class="share-button" onclick="compartir()">🔗 Compartir</button>
 </div>
 
     <h3>Comentarios</h3>
@@ -91,5 +95,11 @@
         <p class="sesion">Inicia sesión para comentar</p>
     <% } %>
     <script src="/public/js/index.js"></script>
+    <script> function compartir() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Enlace copiado al portapapeles');
+        });
+    }</script>
 </body>
 </html>

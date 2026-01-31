@@ -1,0 +1,218 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+form input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    margin-right: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+form input[type="number"] {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    margin-right: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input[type="text"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+}
+
+form button {
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+
+
+thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+thead th {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+tbody td {
+    padding: 12px;
+    font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+form[action="/banear"], form[action="/desbanear"] {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+form[action="/banear"] button, form[action="/desbanear"] button {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form[action="/banear"] button {
+    background-color: #dc3545;
+}
+
+form[action="/banear"] button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+form[action="/desbanear"] button {
+    background-color: #28a745;
+}
+
+form[action="/desbanear"] button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    margin: 4px 0;
+    width: calc(100% - 16px);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Pantallas pequeñas (móviles) */ 
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form button {
+        font-size: 14px;
+        padding: 10px;
+        margin: 4px 0;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    thead th, tbody td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    thead th {
+        text-align: center;
+    }
+
+    tbody td {
+        text-align: center;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    form button {
+        width: 100%;
+    }
+
+    form[action="/banear"] button,
+    form[action="/desbanear"] button {
+        width: 100%;
+    }
+}
+
+/* Pantallas muy pequeñas (menos de 480px)*/ 
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form button {
+        font-size: 12px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    table {
+        font-size: 10px;
+    }
+
+    thead th, tbody td {
+        padding: 6px;
+    }
+}

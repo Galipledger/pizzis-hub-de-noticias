@@ -1,6 +1,39 @@
 const conx = require("../database/db");
 
 class Usuariosmodel {
+       // Método para banear usuario
+       async banearUsuario(id, duracion, motivo) {
+        const fechaFinBaneo = new Date(Date.now() + duracion * 86400000); // Duración en días a milisegundos
+        const sql = "UPDATE usuarios SET baneado = 1, motivo_baneo = ?, fecha_fin_baneo = ? WHERE id = ?";
+        return new Promise((resolve, reject) => {
+            conx.query(sql, [motivo, fechaFinBaneo, id], (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
+            });
+        });
+    }
+
+    // Método para desbanear usuario
+    async desbanearUsuario(id) {
+        const sql = "UPDATE usuarios SET baneado = 0, motivo_baneo = NULL, fecha_fin_baneo = NULL WHERE id = ?";
+        return new Promise((resolve, reject) => {
+            conx.query(sql, [id], (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
+            });
+        });
+    }
+
+    // Método para verificar si el usuario está baneado
+    async verificarBaneo(email) {
+        const sql = "SELECT baneado, motivo_baneo, fecha_fin_baneo FROM usuarios WHERE email = ?";
+        return new Promise((resolve, reject) => {
+            conx.query(sql, [email], (err, result) => {
+                if (err) return reject(err);
+                resolve(result[0] || null);
+            });
+        });
+    }
     async validarUsuarioPorEmail(email) {
         return new Promise((resolve, reject) => {
             let sql = "SELECT * FROM usuarios WHERE email = ?";
@@ -35,14 +68,26 @@ class Usuariosmodel {
             contraseña: ""
         };
     }
-
-    async listar(callback) {
+    listar(busqueda, callback) {
         let sql = "SELECT * FROM usuarios";
-        conx.query(sql, [], (err, results) => {
+        const params = [];
+        if (busqueda) {
+            sql += " WHERE nombre LIKE ? OR email LIKE ?";
+            const terminoBusqueda = '%' + busqueda + '%';
+            params.push(terminoBusqueda, terminoBusqueda);
+        }
+        conx.query(sql, params, (err, results) => {
             if (err) throw err;
-            callback(results);
+            if (typeof callback === 'function') {
+                callback(results);
+            } else {
+                throw new Error('Callback is not a function');
+            }
         });
     }
+    
+
+    
 
     async obtenerusuario(id, callback) {
         let sql = "SELECT * FROM usuarios WHERE id = ?";

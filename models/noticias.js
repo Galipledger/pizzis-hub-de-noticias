@@ -26,7 +26,15 @@ class NoticiasModel {
             });
         });
     }
-
+    async actualizarVoto(idUsuario, idNoticia, tipo) {  
+        const sql = "UPDATE likes_dislikes SET tipo = ? WHERE id_usuario = ? AND id_noticia = ?";  
+        return new Promise((resolve, reject) => {  
+            conx.query(sql, [tipo, idUsuario, idNoticia], (err, results) => {  
+                if (err) reject(err);  
+                resolve(results);  
+            });  
+        });  
+    }
     async guardarVoto(idUsuario, idNoticia, tipo) {
         const sql = "INSERT INTO likes_dislikes (id_usuario, id_noticia, tipo) VALUES (?, ?, ?)";
         return new Promise((resolve, reject) => {
@@ -181,7 +189,7 @@ async listarPorLikes(orden, limit, offset) {
 
     
     
-    
+                                                                
     async contarNoticias(query) {  
         const sql = "SELECT COUNT(*) as count FROM noticias WHERE titulo LIKE ?";  
         return new Promise((resolve, reject) => {  

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    
+    
     <link rel="icon" href="imagenes/file.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +15,22 @@
 <body>
     <form>                                                                     
         <h1>inicia sesión</h1>                                                                                                                  
-        <input type="email" placeholder="email" id="email" >
+
+        <input type="email" placeholder="email" id="email">
         <input type="password" placeholder="contraseña" id="contraseña">
-        <a href="#"  class="olvidar">¿olvidaste tu contraseña?</a>
+        <a href="#" class="olvidar">¿olvidaste tu contraseña?</a>
         <button id="boton">iniciar sesión</button>
-        <p>no tienes una cuenta de pizzis? <a  href="/usuario/0" class="register">regístrate</a></p>
+        <p>no tienes una cuenta de pizzis? <a href="/usuario/0" class="register">regístrate</a></p>
     </form>
     <script type="text/javascript">
         const email = document.querySelector("#email");
         const contraseña = document.querySelector("#contraseña");
         const boton = document.querySelector("#boton");
-        const olvidar = document.querySelector(".olvidar")
-        olvidar.addEventListener("click",()=>{
-            alert("para recuperar tu contraseña contactanos: pizzisbloggamer@gmail.com")
-        })
+        const olvidar = document.querySelector(".olvidar");
+    
+        olvidar.addEventListener("click", () => {
+            alert("Para recuperar tu contraseña, contáctanos: pizzisbloggamer@gmail.com");
+        });
     
         boton.addEventListener("click", async (event) => {
             event.preventDefault();
@@ -42,12 +49,18 @@
     
             if (data.error == 1) {
                 alert("Usuario o contraseña incorrecta");
+            } else if (data.error == 2) {
+                // Utilizar SweetAlert2 para mostrar el mensaje de baneo
+                Swal.fire({
+                    title: 'Acceso Denegado',
+                    text: `Estás baneado. Motivo: ${data.mensaje.motivo}, Duración: ${data.mensaje.duracion}`,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
             } else {
                 location.href = "/home";
             }
         });
     </script>
-    
 </body>
 </html>
-

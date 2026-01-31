@@ -1,38 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/public/css/chat.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gamer Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/public/css/chat.css">
 </head>
 <body>
   <div class="chat-app">
-    
-     
-    
+    <!-- Sidebar con los canales -->
     <div class="sidebar">
-      <div class="contenedorimagen"> 
-      <img src="/public/imagenes/file.png" width="170px" height="170px">
+      <div class="contenedorimagen">
+        <img src="/public/imagenes/file.png" width="170px" height="170px">
       </div>
-      <h2>canales</h2>
+      <h2>Canales</h2>
       <ul>
         <li># general</li>
         <li># support</li>
         <li># gaming</li>
       </ul>
     </div>
+
+    <!-- Área de chat -->
     <div class="chat-area">
       <div id="messages" class="messages"></div>
       <form id="form" class="form">
-        <input id="input" autocomplete="off" placeholder="escribe un mensaje..." />
-        <button>chatear</button>
+        <input id="input" autocomplete="off" placeholder="Escribe un mensaje..." />
+        <button type="submit">Enviar</button>
       </form>
     </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/public/js/index.js"></script>
+  <script>
+    const socket = io();
+    const currentUser = "<%= nombreUsuario %>"; // Nombre del usuario actual
+
+    // Escuchar mensaje de conexión/desconexión de usuario
+    socket.on('user status', (data) => {
+        const item = document.createElement('div');
+        item.classList.add('status-message');
+        item.textContent = `${data.user} ${data.message}`;
+        document.getElementById('messages').appendChild(item);
+        item.scrollIntoView();
+    });
+
+    // Enviar mensaje al hacer submit
+    document.getElementById('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('input');
+        const message = input.value;
+
+        if (message) {
+            socket.emit('chat message', { user: currentUser, message: message });
+            input.value = '';
+        }
+    });
+
+    // Recibir y mostrar mensaje en el chat
+    socket.on('chat message', (data) => {
+        const item = document.createElement('div');
+        item.classList.add('message-item');
+        if (data.user === currentUser) {
+            item.classList.add('self'); // Clase para mensajes propios
+        }
+
+        const username = document.createElement('div');
+        username.classList.add('username');
+        username.textContent = data.user;
+
+        const text = document.createElement('div');
+        text.classList.add('text');
+        text.textContent = data.message;
+
+        item.appendChild(username);
+        item.appendChild(text);
+
+        document.getElementById('messages').appendChild(item);
+        item.scrollIntoView();
+    });
+
+    // Cargar el historial de mensajes al conectarse
+    socket.on('load messages', (mensajes) => {
+        mensajes.forEach((data) => {
+            const item = document.createElement('div');
+            item.classList.add('message-item');
+            if (data.user === currentUser) {
+                item.classList.add('self'); // Clase para mensajes propios
+            }
+
+            const username = document.createElement('div');
+            username.classList.add('username');
+            username.textContent = data.user;
+
+            const text = document.createElement('div');
+            text.classList.add('text');
+            text.textContent = data.message;
+
+            item.appendChild(username);
+            item.appendChild(text);
+
+            document.getElementById('messages').appendChild(item);
+            item.scrollIntoView();
+        });
+    });
+</script>
+
 </body>
 </html>

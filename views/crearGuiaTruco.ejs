@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="imagenes/file.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Reseña</title>
+    <link rel="stylesheet" href="/public/css/creartruco.css"> 
+</head>
+
+<form action="/trucosytips/crear" method="POST" enctype="multipart/form-data">
+    <h1>Crear Nueva Guía o Truco</h1>
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required>
+    
+    <label for="contenido">Contenido:</label>
+    <textarea id="contenido" name="contenido" required></textarea>
+    
+    <label for="miniatura">Miniatura:</label>
+    <input type="file" id="miniatura" name="miniatura" required>
+    
+    <label for="video">Video:</label>
+    <input type="file" id="video" name="video">
+    
+    <button type="submit">Guardar</button>
+</form>

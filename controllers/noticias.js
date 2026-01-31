@@ -33,28 +33,34 @@ module.exports.upload = upload.fields([
 const noticiasModel = new NoticiasModel();
 
 class NoticiasController {
-    async votar(req, res) {
-        const { id } = req.params; 
-        const { tipo } = req.body; 
-        const idUsuario = req.session.idUsuario;
-
-        if (!idUsuario) {
-            return res.render("comentar")
-        }
-
-        try {
-            // Verificar si el usuario ya votó
-            const votoExistente = await noticiasModel.obtenerVoto(idUsuario, id);
-            if (votoExistente) {
-                return res.render("yavotaste")
-            }
-
-            // Registrar el voto
-            await noticiasModel.guardarVoto(idUsuario, id, tipo);
-            res.redirect(`/noticias/${id}`);
-        } catch (error) {
-            res.status(500).send("Error al procesar el voto.");
-        }
+    async votar(req, res) {  
+        const { id } = req.params;   
+        const { tipo } = req.body;   
+        const idUsuario = req.session.idUsuario;  
+    
+        if (!idUsuario) {  
+            return res.render("comentar");  
+        }  
+    
+        try {  
+            // Verificar si el usuario ya votó  
+            const votoExistente = await noticiasModel.obtenerVoto(idUsuario, id);  
+    
+            if (votoExistente) {  
+                // Si el usuario ya ha votado y el nuevo tipo de voto es diferente al existente  
+                if (votoExistente.tipo !== tipo) {  
+                    // Actualizar el voto existente en lugar de guardar uno nuevo  
+                    await noticiasModel.actualizarVoto(idUsuario, id, tipo);  
+                }  
+                return res.redirect(`/noticias/${id}`);  
+            }  
+    
+            // Si no hay voto existente, registrar el nuevo voto  
+            await noticiasModel.guardarVoto(idUsuario, id, tipo);  
+            res.redirect(`/noticias/${id}`);  
+        } catch (error) {  
+            res.status(500).send("Error al procesar el voto.");  
+        }  
     }
     async editarComentario(req, res) {
         const { idComentario } = req.params;
@@ -147,7 +153,7 @@ class NoticiasController {
             const id = req.params.id;
             const noticia = await noticiasModel.obtener(id);
             const comentarios = await noticiasModel.obtenerComentarios(id);
-            const likesDislikes = await noticiasModel.obtenerLikesDislikes(id); // Nueva función
+            const likesDislikes = await noticiasModel.obtenerLikesDislikes(id); 
     
             if (noticia) {
                 res.render("detalleNoticia", { 
@@ -192,7 +198,7 @@ class NoticiasController {
             const video = req.files['video'] ? req.files['video'][0].filename : null;
             const autorId = req.session.idUsuario;
     
-            try {
+            try {                                                                                                     
                 await noticiasModel.guardar({ titulo, contenido, autorId, miniatura, fotoextra, video });  // Añadido fotoextra
                 res.redirect("/noticias");
             } catch (error) {

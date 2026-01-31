@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/trucos.css">
+    <link rel="icon" href="imagenes/file.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">                                
+        <img src="/public/imagenes/file.png" height="120">
+        </div>
+        <nav>
+            <a href="/home">inicio</a>
+            <a href="/noticias">noticias</a>
+            <a href="/resenas">reseñas</a>
+            <a href="/trucosytips">trucos</a>
+            <a href="/chat">comunidad</a>
+            <% if (es_admin) { %> 
+                <a href="/usuarios">usuarios</a> 
+            <% } %>
+        </nav>
+
+        <div class="registro">         
+            <% if (nombreUsuario) { %>
+                <span class="usuario"> <%= nombreUsuario %></span>
+                <a class="cerrar" href="/logout">Cerrar sesión</a>
+                <% } else { %>
+             <a class="iniciar" href="/login">iniciar sesion</a>
+             <a class="regristrarse" href="/usuario/0">registrarse</a>
+             <% } %>
+             
+        </div>
+    </header>
+<h1>Guías y Trucos</h1>
+<div class="contenedor-buscador-filtro">
+    <form class="formulario" action="/trucosytips/buscar" method="GET">                                                
+        <input type="text" name="busqueda" placeholder="Buscar guias o autor" value="<%= busqueda %>">
+        <button class="buscar" type="submit"> <i class="fas fa-search"></i></button>
+    </form>
+    <form class="filtro" action="/trucosytips" method="GET">
+        <label for="order">Ordenar por:</label>
+        <select name="filtro" onchange="this.form.submit()">                                                       
+            <option value="mas_reciente" <%= filtro === "mas_reciente" ? "selected" : "" %>>Más recientes</option>
+            <option value="mas_antiguo" <%= filtro === "mas_antiguo" ? "selected" : "" %>>Más antiguas</option>
+            <option value="autor_asc" <%= filtro === "autor_asc" ? "selected" : "" %>>Autor A-Z</option>
+            <option value="autor_desc" <%= filtro === "autor_desc" ? "selected" : "" %>>Autor Z-A</option>
+        </select>
+    </form>
+    
+    <a class="crear-noticia" href="/trucosytips/crear"><img src="/public/imagenes/361984.png" alt=""></a>
+    </div>
+<div class="guias-trucos-grid">
+    <% if (guiasTrucos.length > 0) { %>
+        <% guiasTrucos.forEach(guiaTruco => { %>
+            <div class="guia-truco-cuadro">
+                <img src="/uploads/<%= guiaTruco.miniatura %>" alt="Miniatura de la guía/truco">
+
+                <div class="guia-truco-info">
+                    <h2><%= guiaTruco.titulo %></h2>
+                    <p><%= guiaTruco.contenido.substring(0, 100) %>...</p>
+
+                    <a href="/guias-trucos/<%= guiaTruco.id %>" class="ver-mas-btn">Leer más</a>
+                                                                                                    
+                    <p class="autor">Autor: <strong><%= guiaTruco.autor %></strong></p>
+                </div>
+                    <% if (guiaTruco.id_usuario === idUsuario || es_admin) { %>
+                        <div class="acciones-admin">
+                            <a href="/trucosytips/editar/<%= guiaTruco.id %>" class="editar">✎ Actualizar</a>
+                            <form class="botoneliminar" action="/trucosytips/borrar/<%= guiaTruco.id %>" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta guía/truco?');">
+                                <button type="submit" class="btn-eliminar">🗑️ Eliminar</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            
+        <% }) %>
+    <% } else { %>
+        <p>No hay guías o trucos disponibles.</p>
+    <% } %>
+</div>
+
+<ul class="paginador">
+    <% if (pagina > 1) { %>
+        <li>
+            <a href="/trucosytips?busqueda=<%= busqueda %>&pagina=<%= pagina - 1 %>&filtro=<%= filtro %>"><</a>
+        </li>
+    <% } %>
+    <% for (let i = 1; i <= totalPaginas; i++) { %>
+        <li class="<%= pagina === i ? 'activo' : '' %>">
+            <a href="/trucosytips?busqueda=<%= busqueda %>&pagina=<%= i %>&filtro=<%= filtro %>"><%= i %></a>
+        </li>
+    <% } %>
+    <% if (pagina < totalPaginas) { %>
+        <li>
+            <a href="/trucosytips?busqueda=<%= busqueda %>&pagina=<%= pagina + 1 %>&filtro=<%= filtro %>">></a>
+        </li>
+    <% } %>
+</ul>
+
+
+<footer>
+    <div class="footerconteiner">
+      <div class="imagenfooter">
+         <img src="/imagenes/file.png" height="150" width="150">
+      </div>
+       <div class="redes">
+         <h4>¡siguenos!</h4>
+         <a href="https://www.facebook.com/tuUsuario" target="_blank">
+             <i class="fab fa-facebook-f"></i>
+         </a>
+         <a href="https://www.twitter.com/tuUsuario" target="_blank">
+             <i class="fab fa-twitter"></i>
+         </a>
+         <a href="https://www.instagram.com/tuUsuario" target="_blank">
+             <i class="fab fa-instagram"></i>
+         </a>
+         <a href="https://www.linkedin.com/in/tuUsuario" target="_blank">
+             <i class="fab fa-linkedin-in"></i>
+         </a>
+         <a href="https://www.snapchat.com/add/tuUsuario" target="_blank">
+             <i class="fab fa-snapchat"></i>
+         </a>
+         <a href="https://www.tiktok.com/@tuUsuario" target="_blank">
+             <i class="fab fa-tiktok"></i>
+         </a>
+         <a href="https://wa.me/tuNumeroDeTelefono" target="_blank">
+             <i class="fab fa-whatsapp"></i>
+         </a>
+         <a href="https://www.youtube.com/tuUsuario" target="_blank">
+             <i class="fab fa-youtube"></i>
+         </a>
+       </div>
+       <div class="links"> 
+         <h4>mas links</h4>
+         <ul>
+             <li><a href="/home">inicio</a></li>
+             <li><a href="/ayuda">ayuda</a></li>
+             <li><a href="/contactos">contactanos</a></li>
+             <li><a href="/politicas">politica de privacidad</a></li>
+         </ul>
+       </div>
+    </div>       
+</footer>
+<script src="/public/js/index.js"></script>
+</body>
+</html>
